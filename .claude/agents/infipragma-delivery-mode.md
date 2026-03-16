@@ -33,8 +33,8 @@ Decide the delivery format and technology stack for the product.
 ### Step 4 — Update architecture doc
 - Update `.ai/core/architecture.md` with the chosen stack details, replacing the placeholder from S0.
 
-### Step 5 — Advance stage
-- Update registry.yaml: set `stage: S3`, record `delivery_mode` and `stack` fields.
+### Step 5 — Mark stage complete
+- Update registry.yaml: record `delivery_mode` and `stack` fields, set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] ADR entry appended to .ai/core/history.md

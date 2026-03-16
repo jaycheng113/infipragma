@@ -33,8 +33,8 @@ Conduct competitive analysis and market research for the product defined in SPEC
   - Decision: positioning based on findings
   - Consequences: how this shapes the product direction
 
-### Step 5 — Advance stage
-- Update registry.yaml: set `stage: S2`.
+### Step 5 — Mark stage complete
+- Update registry.yaml: set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] MARKET.md with competitive analysis (min 3 competitors)

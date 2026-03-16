@@ -33,7 +33,7 @@ Wait for the user to answer all 3 before proceeding.
   - Differentiator
   - Screens described from the approved prototype
   - Acceptance criteria derived from the prototype
-- Update registry.yaml: set `phase: build`, `stage: S0`.
+- Update registry.yaml: set `phase: build`, `current_stage: S0`, and stage status to `completed`.
 
 ## Required outputs (all mandatory)
 - [ ] Exactly 3 questions asked (no more, no fewer)

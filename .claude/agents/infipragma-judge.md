@@ -99,7 +99,7 @@ next_action: "what should happen next"
 1. Git commit with correct format (feat:, fix:, docs(.ai):)
 2. Write session log to .infipragma/memory/sessions/{timestamp}_{agent}.md
 3. Update .infipragma/meta/handoff.yaml with session results
-4. Update .infipragma/meta/registry.yaml — set stage status to "completed"
+4. Update .infipragma/meta/registry.yaml — status already set to passed/failed in Step 3 (do NOT overwrite with "completed")
 5. Update .ai/ if any module changed significantly
 6. Append to PROGRESS.md
 

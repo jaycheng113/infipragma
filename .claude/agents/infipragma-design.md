@@ -33,8 +33,8 @@ Generate a comprehensive feature list that defines every feature the product wil
 - All `core` features should have the lowest priority numbers.
 - Within each category, order by dependency (foundations first).
 
-### Step 5 — Advance stage
-- Update registry.yaml: set `stage: S4`.
+### Step 5 — Mark stage complete
+- Update registry.yaml: set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] feature_list.json with 20+ features

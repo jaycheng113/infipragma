@@ -34,9 +34,9 @@ Run full quality assurance: regression testing, performance audit, and security 
   - Overall verdict: PASS or FAIL
   - List of issues to fix before deployment
 
-### Step 6 — Advance or block
-- If PASS (no core regressions, no critical issues): update registry.yaml to `stage: S7`.
-- If FAIL: keep stage at S6, document what needs fixing.
+### Step 6 — Mark stage complete
+- If PASS (no core regressions, no critical issues): set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
+- If FAIL: keep stage status at `in_progress`, document what needs fixing in QA-REPORT.md.
 
 ## Required outputs (all mandatory)
 - [ ] All E2E tests executed

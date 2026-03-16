@@ -7,7 +7,6 @@ set -euo pipefail
 # --- Configuration ---
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REGISTRY="$PROJECT_DIR/.infipragma/meta/registry.yaml"
-HANDOFF="$PROJECT_DIR/.infipragma/meta/handoff.yaml"
 CONFIG="$PROJECT_DIR/.infipragma/config.yaml"
 AGENTS_DIR="$PROJECT_DIR/.claude/agents"
 LOG_DIR="$PROJECT_DIR/.infipragma/logs"
@@ -49,6 +48,10 @@ done
 check_prerequisites() {
   if ! command -v yq &> /dev/null; then
     echo "ERROR: yq is required. Install with: brew install yq"
+    exit 1
+  fi
+  if ! command -v bc &> /dev/null; then
+    echo "ERROR: bc is required for budget calculations. Install with: apt-get install bc"
     exit 1
   fi
   if ! command -v claude &> /dev/null; then
@@ -193,10 +196,15 @@ check_crash_recovery() {
     echo "Lock info: $lock_info"
     echo "Recovering..."
 
-    git -C "$PROJECT_DIR" stash 2>/dev/null || true
+    local stash_result
+    stash_result=$(git -C "$PROJECT_DIR" stash 2>&1) || true
+    if echo "$stash_result" | grep -q "Saved working directory"; then
+      echo "WARNING: Uncommitted changes were stashed. Use 'git stash pop' to recover."
+      echo "  Stash ref: $(git -C "$PROJECT_DIR" stash list | head -1)"
+    fi
     git -C "$PROJECT_DIR" checkout -- "$REGISTRY" 2>/dev/null || true
     rm -f "$LOCK_FILE"
-    echo "[$(date -u +%FT%TZ)] CRASH RECOVERY: $lock_info" >> "$LOG_DIR/crashes.log"
+    echo "[$(date -u +%FT%TZ)] CRASH RECOVERY: $lock_info | stash: $stash_result" >> "$LOG_DIR/crashes.log"
 
     echo "Recovery complete. Resuming pipeline."
   fi

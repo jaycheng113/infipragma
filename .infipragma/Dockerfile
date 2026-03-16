@@ -9,11 +9,13 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       git \
       curl \
+      bc \
       ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
-# Install yq
-RUN curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o /usr/bin/yq && \
+# Install yq (multi-arch support)
+ARG TARGETARCH=amd64
+RUN curl -sL "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${TARGETARCH}" -o /usr/bin/yq && \
     chmod +x /usr/bin/yq
 
 WORKDIR /project

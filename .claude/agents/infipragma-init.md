@@ -23,8 +23,8 @@ Initialize the project knowledge base from the locked SPEC.md.
   - `.ai/core/glossary.md` — key terms from SPEC.md.
 - Ensure each .ai/ doc follows the standard format with frontmatter (module, version, last_updated).
 
-### Step 4 — Advance stage
-- Update registry.yaml: set `stage: S1`.
+### Step 4 — Mark stage complete
+- Update registry.yaml: set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] CLAUDE.md updated for this specific product

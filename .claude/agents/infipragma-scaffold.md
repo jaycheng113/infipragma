@@ -34,8 +34,8 @@ Create the project scaffold from the selected stack template and ensure the dev 
 - Run `git init` if not already initialized.
 - Create the first project commit with all scaffold files.
 
-### Step 6 — Advance stage
-- Update registry.yaml: set `stage: S5`.
+### Step 6 — Mark stage complete
+- Update registry.yaml: set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] Project files created per stack template

@@ -19,9 +19,11 @@ fi
 # Webhook notification
 webhook=$(yq '.notify.webhook' "$CONFIG" 2>/dev/null)
 if [ -n "$webhook" ] && [ "$webhook" != "null" ] && [ "$webhook" != "" ]; then
+  # Escape message for safe JSON embedding
+  safe_message=$(printf '%s' "[InfiPragma ${level}] ${message}" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\t/\\t/g' | tr '\n' ' ')
   curl -s -X POST "$webhook" \
     -H "Content-Type: application/json" \
-    -d "{\"text\":\"[InfiPragma ${level}] ${message}\"}" \
+    -d "{\"text\":\"${safe_message}\"}" \
     > /dev/null 2>&1 || true
 fi
 
