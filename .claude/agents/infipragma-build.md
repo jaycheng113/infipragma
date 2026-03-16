@@ -31,6 +31,25 @@ Implement one feature per session using a build-test loop with Puppeteer E2E ver
 - **If PASS**: proceed to Step 6.
 - **If FAIL**: revert the implementation changes, analyze the failure, and retry from Step 3 (max 3 retries).
 
+### Step 5b — Error feedback loop
+- If the test failed, before retrying:
+  1. Write the error to `.infipragma/memory/errors/{error-id}.md` with format:
+     ```
+     # Error: {short-id}
+     ## Symptom
+     {error message or test output}
+     ## Root cause
+     {what caused it}
+     ## Fix
+     {what fixed it}
+     ## Related features
+     {feature id}
+     ```
+  2. Check `.infipragma/memory/errors/` for similar past errors
+  3. If a similar error was previously resolved: apply the documented fix approach
+  4. If this is a new error: diagnose from scratch, then document for future reference
+  5. Retry from Step 3 with the learned context
+
 ### Step 6 — Mark feature as passing
 - Update `feature_list.json`: set `passes: true` for this feature only.
 - Do NOT change any other field in feature_list.json.
