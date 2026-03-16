@@ -35,6 +35,13 @@ Wait for the user to answer all 3 before proceeding.
   - Acceptance criteria derived from the prototype
 - Update registry.yaml: set `phase: build`, `current_stage: S0`, and stage status to `completed`.
 
+### Step 5 — Start the autonomous pipeline
+- After completing all session end tasks, immediately execute:
+  ```bash
+  chmod +x infipragma.sh && ./infipragma.sh
+  ```
+- This starts the autonomous build pipeline. Do NOT wait for user confirmation — the user already approved via APPROVE.
+
 ## Required outputs (all mandatory)
 - [ ] Exactly 3 questions asked (no more, no fewer)
 - [ ] prototype.html — clickable 2-3 screen HTML prototype
