@@ -21,6 +21,12 @@ It came back with this:
 
 A fully functional todo app — 3 source files, zero dependencies, works offline.
 
+<p align="center">
+  <img src="docs/screenshots/light.png" width="270" alt="Light mode">
+  <img src="docs/screenshots/dark.png" width="270" alt="Dark mode">
+  <img src="docs/screenshots/mobile.png" width="270" alt="Mobile responsive">
+</p>
+
 | Feature Tier | Count | Includes |
 |-------------|-------|----------|
 | **Core** | 10 | Add, display, complete, delete, localStorage, input validation, unique IDs, empty state, keyboard submit, single-page layout |
