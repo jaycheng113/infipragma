@@ -4,6 +4,16 @@
 
 set -euo pipefail
 
+# --- macOS compatibility: use gtimeout if timeout is missing ---
+if ! command -v timeout &> /dev/null; then
+  if command -v gtimeout &> /dev/null; then
+    timeout() { gtimeout "$@"; }
+  else
+    # Fallback: run without timeout
+    timeout() { shift; "$@"; }
+  fi
+fi
+
 # --- Configuration ---
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REGISTRY="$PROJECT_DIR/.infipragma/meta/registry.yaml"
