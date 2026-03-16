@@ -75,17 +75,29 @@ Open Claude Code and start talking:
 You:    I want to build a personal finance tracker that categorizes
         expenses and shows monthly trends. Web app, mobile-friendly.
 
-Claude: Let me understand your idea better...
-        [asks clarifying questions, discusses trade-offs, refines the spec]
+Claude: I have 3 questions to clarify your idea:
+        1. Who uses it? (target user, context, frequency)
+        2. What's the core action a user does?
+        3. How is it different from existing solutions?
 
-You:    Looks good, let's build it. Run ./infipragma.sh
+You:    1. Freelancers tracking business expenses weekly
+        2. Snap a receipt photo and auto-categorize
+        3. No subscription, offline-first, exports to CSV for accountants
 
-Claude: [executes the pipeline, autonomously delivers the product]
+Claude: Got it. Here's a clickable HTML prototype with 3 screens...
+        [generates prototype.html — landing, receipt capture, monthly dashboard]
+        Use /revise to iterate, or /approve to lock and proceed.
+
+You:    /approve
+
+Claude: Spec locked. Now running ./infipragma.sh
+        [S0 Init -> S1 Research -> S2 Stack -> ... -> S7 Deploy]
+        [autonomously delivers the product]
 ```
 
-**You bring the idea. InfiPragma handles the research, development, testing, and deployment.**
+The first phase is a **prototype conversation** — InfiPragma asks exactly 3 questions, generates a clickable HTML prototype, and waits for your `/approve` before building anything. After that, everything is autonomous.
 
-Running through Claude Code is recommended — when the pipeline hits issues (a test fails, a dependency breaks, an agent produces incomplete output), Claude Code diagnoses and fixes it on the fly. You don't debug. You don't intervene. You plan.
+Running through Claude Code is recommended — when the pipeline hits issues, Claude Code diagnoses and fixes it on the fly. You don't debug. You don't intervene. You plan.
 
 ### Prerequisites
 
@@ -102,10 +114,15 @@ Running through Claude Code is recommended — when the pipeline hits issues (a 
 Your Idea
    |
    v
-+------------------------------------------------------+
++- Prototype (interactive) --------+
+|  3 questions -> HTML prototype    |
+|  /revise to iterate               |
+|  /approve to lock                 |
++----------------------------------+
+   |
+   v
++- Autonomous Pipeline (unattended) -------------------+
 |                   infipragma.sh                       |
-|                                                       |
-|  Read registry.yaml -> Pick .md agent -> claude -p    |
 |                                                       |
 |  S0 Init -> S1 Research -> S2 Stack -> S3 Design      |
 |      |          |            |            |            |
@@ -120,7 +137,7 @@ Your Idea
 Deployed Product (with market research, tests, docs)
 ```
 
-Every stage must pass a judge review (score 7+/10) before the pipeline advances. The judge is also a `.md` file.
+The prototype phase is the only part that requires your input. Every stage after that must pass a judge review (score 7+/10) before the pipeline advances. The judge is also a `.md` file.
 
 ### What's Inside an Agent?
 
