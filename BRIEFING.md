@@ -34,9 +34,9 @@ Clarification Agent
 
 Prototype Agent
   → generates a clickable 2-3 screen HTML prototype with fake data
-  → user types /revise "..." to iterate, or /approve to lock
+  → user types REVISE "..." to iterate, or APPROVE to lock
 
-On /approve:
+On APPROVE:
   → SPEC.md is written and locked
   → registry.yaml phase changes to "build"
   → pipeline starts

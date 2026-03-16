@@ -21,9 +21,9 @@ Wait for the user to answer all 3 before proceeding.
 - Save to `prototype.html` in the project root.
 
 ### Step 3 — Iteration loop
-- Tell the user: use `/revise` with feedback to iterate on the prototype, or `/approve` to lock and proceed.
-- On `/revise`: update prototype.html based on feedback, present again.
-- On `/approve`: proceed to Step 4.
+- Tell the user: use `REVISE` with feedback to iterate on the prototype, or `APPROVE` to lock and proceed.
+- On `REVISE`: update prototype.html based on feedback, present again.
+- On `APPROVE`: proceed to Step 4.
 
 ### Step 4 — Lock and advance
 - Write SPEC.md to the project root capturing:
@@ -38,7 +38,7 @@ Wait for the user to answer all 3 before proceeding.
 ## Required outputs (all mandatory)
 - [ ] Exactly 3 questions asked (no more, no fewer)
 - [ ] prototype.html — clickable 2-3 screen HTML prototype
-- [ ] User explicitly typed /approve before advancing
+- [ ] User explicitly typed APPROVE before advancing
 - [ ] SPEC.md written with product definition
 - [ ] registry.yaml updated to phase=build, stage=S0
 
@@ -53,6 +53,6 @@ Wait for the user to answer all 3 before proceeding.
 ## Hard rules
 - NEVER ask more than 3 questions.
 - NEVER ask fewer than 3 questions.
-- NEVER proceed past prototype without explicit /approve from the user.
+- NEVER proceed past prototype without explicit APPROVE from the user.
 - NEVER write product code — only the prototype HTML and SPEC.md.
 - NEVER skip the prototype step.

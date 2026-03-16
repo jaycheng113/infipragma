@@ -44,4 +44,4 @@ Initialize the project knowledge base from the locked SPEC.md.
 ## Hard rules
 - NEVER write product code in this stage.
 - NEVER skip reading SPEC.md.
-- NEVER modify SPEC.md — it was locked by /approve.
+- NEVER modify SPEC.md — it was locked by APPROVE.
