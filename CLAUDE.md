@@ -36,7 +36,7 @@ Read `AGENTS.md` for the full pipeline orchestration protocol. Claude Code reads
 
 ## Rules
 
-- All content must be in English
+- **All content, output, commit messages, and communication MUST be in English. Never use any other language regardless of system locale or user language settings.**
 - Keep `.ai/` documents concise and focused
 - Use YAML frontmatter in `.ai/` docs where applicable
 - Make separate commits for each logical change
