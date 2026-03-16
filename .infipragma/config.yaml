@@ -1,0 +1,8 @@
+# InfiPragma Configuration
+# Fill in your idea and optional hints, then tell Claude Code to start.
+
+idea: ""                  # Describe your product here — one sentence or a paragraph
+hints: ""                 # Optional: "prefer Python", "must work offline", etc.
+notify:
+  telegram: ""            # Optional: bot token for Telegram notifications
+  email: ""               # Optional: email address for notifications

@@ -1,0 +1,19 @@
+name: CLI Tool
+delivery_mode: cli
+stack:
+  language: Python 3.12+
+  framework: Click
+  packaging: PyPI (setuptools)
+  testing: pytest
+structure:
+  src_dir: src/
+  tests_dir: tests/
+  entry_point: src/cli.py
+init_commands:
+  - python -m venv .venv
+  - .venv/bin/pip install click rich pytest
+  - mkdir -p src tests
+deploy_command: python -m build && twine upload dist/*
+dev_command: .venv/bin/python src/cli.py
+build_command: python -m build
+test_command: .venv/bin/pytest tests/

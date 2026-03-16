@@ -1,0 +1,23 @@
+name: Chat Bot
+delivery_mode: bot
+stack:
+  framework: Discord.js 14
+  language: TypeScript
+  deployment: Railway
+  alternatives:
+    telegram: node-telegram-bot-api
+structure:
+  src_dir: src/
+  commands_dir: src/commands/
+  events_dir: src/events/
+  entry_point: src/index.ts
+init_commands:
+  - npm init -y
+  - npm install discord.js dotenv
+  - npm install -D typescript @types/node ts-node
+  - npx tsc --init
+  - mkdir -p src/commands src/events
+deploy_command: railway up
+dev_command: npx ts-node src/index.ts
+build_command: npx tsc
+test_command: npx jest

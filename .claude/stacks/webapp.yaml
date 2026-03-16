@@ -1,0 +1,22 @@
+name: Web Application
+delivery_mode: webapp
+stack:
+  framework: Next.js 14
+  language: TypeScript
+  database: Supabase (PostgreSQL)
+  auth: Supabase Auth
+  styling: Tailwind CSS
+  deployment: Vercel
+structure:
+  src_dir: src/
+  pages_dir: src/app/
+  components_dir: src/components/
+  lib_dir: src/lib/
+  api_dir: src/app/api/
+init_commands:
+  - npx create-next-app@14 . --typescript --tailwind --eslint --app --src-dir --no-import-alias
+  - npm install @supabase/supabase-js @supabase/ssr
+deploy_command: vercel --prod
+dev_command: npm run dev
+build_command: npm run build
+test_command: npx playwright test

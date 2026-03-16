@@ -1,0 +1,21 @@
+name: API Service
+delivery_mode: api
+stack:
+  framework: FastAPI
+  language: Python 3.12+
+  database: PostgreSQL (SQLAlchemy + Alembic)
+  deployment: Railway
+  testing: pytest + httpx
+structure:
+  src_dir: app/
+  routes_dir: app/routes/
+  models_dir: app/models/
+  entry_point: app/main.py
+init_commands:
+  - python -m venv .venv
+  - .venv/bin/pip install fastapi uvicorn sqlalchemy alembic psycopg2-binary httpx pytest
+  - mkdir -p app/routes app/models tests
+deploy_command: railway up
+dev_command: .venv/bin/uvicorn app.main:app --reload
+build_command: echo "No build step for FastAPI"
+test_command: .venv/bin/pytest tests/

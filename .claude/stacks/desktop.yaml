@@ -1,0 +1,21 @@
+name: Desktop Application
+delivery_mode: desktop
+stack:
+  framework: Tauri 2
+  frontend: React + TypeScript
+  styling: Tailwind CSS
+  deployment: GitHub Releases
+structure:
+  src_dir: src/
+  frontend_dir: src/
+  backend_dir: src-tauri/
+init_commands:
+  - npm create vite@latest . -- --template react-ts
+  - npm install
+  - npm install -D @tauri-apps/cli@latest
+  - npx tauri init
+  - npm install -D tailwindcss @tailwindcss/vite
+deploy_command: npx tauri build
+dev_command: npx tauri dev
+build_command: npx tauri build
+test_command: npx playwright test

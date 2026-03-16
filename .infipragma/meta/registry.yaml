@@ -1,0 +1,20 @@
+# InfiPragma Pipeline State
+# This file is managed automatically by the orchestration system.
+# Do not edit manually unless you know what you're doing.
+
+phase: "prototype"
+current_stage: "clarification"
+stages:
+  S0: { status: pending }
+  S1: { status: pending }
+  S2: { status: pending }
+  S3: { status: pending }
+  S4: { status: pending }
+  S5: { status: pending, features_total: 0, features_passing: 0 }
+  S6: { status: pending }
+  S7: { status: pending, live_url: null }
+maintenance:
+  mode: idle
+  last_audit: null
+  next_audit: null
+  open_items: 0
