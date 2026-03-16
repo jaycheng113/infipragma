@@ -101,15 +101,16 @@ You:   I want to build a personal finance tracker that categorizes expenses
 Claude: Let me understand your idea better...
         [asks clarifying questions, discusses trade-offs, refines the spec]
 
-You:   Looks good, let's build it.
+You:   Looks good, let's build it. Run ./infipragma.sh
 
-Claude: I'll run the InfiPragma pipeline now.
-        [executes infipragma.sh, autonomously delivers the product]
+Claude: [executes infipragma.sh, autonomously delivers the product]
 ```
 
 That's it. **You bring the idea, Claude Code does everything else.**
 
-The key advantage of working through Claude Code: when the pipeline encounters issues — a test fails, a dependency breaks, an agent produces incomplete output — **Claude Code diagnoses and fixes it automatically**. It reads the error, understands the context, patches the `.md` instructions or the generated code, and continues. You don't debug. You don't intervene. You plan.
+You can also run `./infipragma.sh` directly in your terminal — but running it through Claude Code is recommended, because when the pipeline encounters issues — a test fails, a dependency breaks, an agent produces incomplete output — **Claude Code diagnoses and fixes it on the fly**.
+
+You don't debug. You don't intervene. You plan.
 
 ---
 
