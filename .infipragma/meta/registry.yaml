@@ -5,16 +5,25 @@
 phase: "prototype"
 current_stage: "clarification"
 stages:
-  S0: { status: pending }
-  S1: { status: pending }
-  S2: { status: pending }
-  S3: { status: pending }
-  S4: { status: pending }
-  S5: { status: pending, features_total: 0, features_passing: 0 }
-  S6: { status: pending }
-  S7: { status: pending, live_url: null }
+  S0: { status: pending, retries: 0 }
+  S1: { status: pending, retries: 0 }
+  S2: { status: pending, retries: 0 }
+  S3: { status: pending, retries: 0 }
+  S4: { status: pending, retries: 0 }
+  S5: { status: pending, retries: 0, features_total: 0, features_passing: 0 }
+  S6: { status: pending, retries: 0 }
+  S7: { status: pending, retries: 0, live_url: null }
 maintenance:
   mode: idle
   last_audit: null
   next_audit: null
   open_items: 0
+orchestration:
+  retry_count: 0
+  max_retries: 3
+  last_agent: null
+  last_run: null
+  last_exit_code: null
+  session_timeout: 1800
+  total_cost: 0.0
+  total_sessions: 0
