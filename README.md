@@ -1,56 +1,106 @@
 # InfiPragma
 
-**Markdown files are all you need.**
+**Have an idea. Chat with Claude Code. Get a product.**
 
-InfiPragma is an autonomous product delivery engine built entirely from `.md` files. One sentence in, one deployed product out — no framework, no SDK, no abstractions.
+InfiPragma is a set of `.md` files that guide Claude Code through a complete product delivery pipeline — from market research to deployment. You don't write code. You don't manage tasks. You just describe what you want to build, discuss it with Claude Code, and walk away.
+
+---
+
+## Proof: TodoApp
+
+We gave InfiPragma two lines:
 
 ```yaml
 idea: "A simple todo list web app with add, complete, and delete tasks"
 hints: "use vanilla HTML/CSS/JS, no framework, single page"
 ```
 
-47 autonomous sessions later:
+It came back with this:
 
-```
-S0  Init           [PASSED]     S4  Scaffold       [PASSED]
-S1  Research       [PASSED]     S5  Build          [PASSED]  25/25 features
-S2  DeliveryMode   [PASSED]     S6  QA             [PASSED]  Lighthouse 100/96/100/90
-S3  Design         [PASSED]     S7  Deploy         [PASSED]
-```
+### The Product
 
-A working todo app with dark mode, drag-and-drop, animations, accessibility, 25 Puppeteer E2E tests — all generated autonomously. **See the full output in [`examples/todoapp/`](examples/todoapp/).**
+A fully functional todo app — 3 source files, zero dependencies, works offline.
+
+| Feature Tier | Count | Includes |
+|-------------|-------|----------|
+| **Core** | 10 | Add, display, complete, delete, localStorage, input validation, unique IDs, empty state, keyboard submit, single-page layout |
+| **Enhanced** | 9 | Filters (all/active/completed), task counter, clear completed, inline editing, responsive design, drag-and-drop reorder, JSON export/import, timestamps, select-all toggle |
+| **Polish** | 6 | Dark mode, CSS animations, full accessibility (ARIA + screen reader), favicon + dynamic title, hover/focus states, print stylesheet |
+
+**Lighthouse scores**: Performance 100 / Accessibility 96 / Best Practices 100 / SEO 90
+
+Every feature has a Puppeteer E2E test. 25 features, 25 tests, 24 passing (1 known flaky due to Puppeteer double-click timing, not a product bug).
+
+### The Competitive Analysis
+
+Before writing a single line of code, InfiPragma researched the market and produced [`MARKET.md`](examples/todoapp/MARKET.md):
+
+| Competitor | Strengths | Our Differentiation |
+|-----------|-----------|-------------------|
+| Todoist | Feature-rich, cross-platform | Zero dependencies, no account needed |
+| Microsoft To Do | Microsoft ecosystem | Privacy-first, no tracking, offline-only |
+| TickTick | Calendar integration, habits | Instant load, works as local file |
+| Google Tasks | Gmail integration | No Google account, no data collection |
+| TodoMVC | Reference implementation | Fully functional product, not just a demo |
+
+Positioning: **independent + minimal** — the only todo app that works by opening a single HTML file.
+
+### The Build Process
+
+| Metric | Value |
+|--------|-------|
+| Total sessions | 47 |
+| Build sessions (S5) | 25 — one feature per session, each with E2E test |
+| Judge reviews | 8 — one per stage, all passed |
+| Average judge score | 9.0 / 10 |
+| Retries needed | 0 |
+| Human intervention | 0 |
+
+The entire pipeline — init, research, architecture, design, scaffold, 25 features, QA, deploy — ran unattended.
+
+**Full output: [`examples/todoapp/`](examples/todoapp/)** — every file InfiPragma generated, including session logs, judge reports, feature list, architecture docs, and the product itself.
 
 ---
 
-## The Idea
+## How to Use
 
-[Claude Code Superpowers](https://github.com/obra/superpowers) proved that a single `.md` file can make an AI follow complex workflows — TDD, code review, architectural planning — as reliably as hand-coded logic.
+### Prerequisites
 
-InfiPragma pushes this to its conclusion: **if one `.md` file can guide one task, can a system of `.md` files deliver an entire product?**
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
+- `ANTHROPIC_API_KEY` in your environment
+- `yq` (`brew install yq`)
 
-13 Markdown files define 13 specialized agents. A 400-line bash script chains them together. That's the whole system.
+### The Workflow
 
-```
-Traditional Agent Framework          InfiPragma
-─────────────────────────           ──────────
-Python classes                      Markdown files
-Event handlers                      Step-by-step instructions
-Plugin APIs                         Plain text
-pip install + config                git clone
-"Read the docs"                     Read the .md — it IS the agent
+```bash
+git clone https://github.com/JayCheng113/InfiPragma.git
+cd InfiPragma
 ```
 
-| System | Agent Defined By | To Modify It |
-|--------|-----------------|--------------|
-| OpenHands | Python classes + event handlers | Write Python |
-| SWE-agent | Python + ACI config | Write Python |
-| AI Scientist | Python pipeline | Write Python |
-| Devin | Closed source | You can't |
-| **InfiPragma** | **`.md` files** | **Edit text** |
+Then open Claude Code and start talking:
+
+```
+You:   I want to build a personal finance tracker that categorizes expenses
+       and shows monthly trends. Web app, mobile-friendly.
+
+Claude: Let me understand your idea better...
+        [asks clarifying questions, discusses trade-offs, refines the spec]
+
+You:   Looks good, let's build it.
+
+Claude: I'll run the InfiPragma pipeline now.
+        [executes infipragma.sh, autonomously delivers the product]
+```
+
+That's it. **You bring the idea, Claude Code does everything else.**
+
+The key advantage of working through Claude Code: when the pipeline encounters issues — a test fails, a dependency breaks, an agent produces incomplete output — **Claude Code diagnoses and fixes it automatically**. It reads the error, understands the context, patches the `.md` instructions or the generated code, and continues. You don't debug. You don't intervene. You plan.
 
 ---
 
 ## How It Works
+
+13 Markdown files define 13 agents. A bash script reads the pipeline state, picks the right `.md` file, and feeds it to Claude Code in headless mode.
 
 ```
 Your Idea
@@ -58,7 +108,6 @@ Your Idea
    v
 +------------------------------------------------------+
 |                   infipragma.sh                       |
-|         (400 lines of bash — the only code)           |
 |                                                       |
 |  Read registry.yaml -> Pick .md agent -> claude -p    |
 |                                                       |
@@ -71,137 +120,28 @@ Your Idea
 |   |Judge|     |Judge|    |Judge|      |Judge|        |
 |   | .md |     | .md |    | .md |      | .md |        |
 |   +-----+     +-----+    +-----+      +-----+        |
-|                                                       |
-|  +-----------------------------------------------+   |
-|  |  Memory (.md files for cross-session state)    |   |
-|  +-----------------------------------------------+   |
 +------------------------------------------------------+
    |
    v
-Deployed Product + Maintenance Mode
+Deployed Product
 ```
 
-### The Pipeline
+| Stage | What Happens |
+|-------|-------------|
+| S0 Init | Set up project knowledge base and architecture docs |
+| S1 Research | Market research, competitive analysis |
+| S2 Delivery Mode | Choose tech stack and deployment strategy |
+| S3 Design | Generate prioritized feature list |
+| S4 Scaffold | Create project skeleton and dev environment |
+| S5 Build | Implement features one at a time, each with E2E test |
+| S6 QA | Regression testing, Lighthouse audit, security scan |
+| S7 Deploy | Build, deploy, verify |
 
-| Stage | Agent | What Happens |
-|-------|-------|-------------|
-| S0 | `infipragma-init.md` | Project knowledge base, architecture docs |
-| S1 | `infipragma-research.md` | Market research, competitive analysis |
-| S2 | `infipragma-delivery-mode.md` | Choose stack and deployment strategy |
-| S3 | `infipragma-design.md` | Feature list with priorities and categories |
-| S4 | `infipragma-scaffold.md` | Project skeleton, dev environment |
-| S5 | `infipragma-build.md` | Implement features one by one with E2E tests |
-| S6 | `infipragma-qa.md` | Regression, Lighthouse, security audit |
-| S7 | `infipragma-deploy.md` | Build, deploy, verify |
-
-Every stage is validated by `infipragma-judge.md` — a quality gate that scores the work 0-10 and blocks progression if quality is below 7.
-
----
-
-## Demo: TodoApp
-
-The [`examples/todoapp/`](examples/todoapp/) directory contains the complete output of an InfiPragma run. Everything in it was generated autonomously from the two-line config above.
-
-### What Was Built
-
-- **3 files**: `index.html` (59 lines), `style.css` (685 lines), `app.js` (511 lines)
-- **Zero dependencies** — no npm, no framework, no build step
-- **25 features** across 3 tiers:
-  - **Core (10)**: CRUD, localStorage, validation, unique IDs, empty state, Enter submit
-  - **Enhanced (9)**: filters, task counter, clear completed, inline edit, responsive, drag-and-drop, export/import JSON, timestamps, select-all toggle
-  - **Polish (6)**: dark mode, animations, accessibility (ARIA + screen reader), favicon + dynamic title, hover states, print styles
-- **25 Puppeteer E2E tests** — one per feature
-- **Lighthouse**: Performance 100, Accessibility 96, Best Practices 100, SEO 90
-
-### What Was Generated Along the Way
-
-| File | What It Is |
-|------|-----------|
-| `MARKET.md` | Competitive analysis (5 competitors: Todoist, Microsoft To Do, TickTick, Google Tasks, TodoMVC) |
-| `feature_list.json` | 25 features with priorities, categories, modules, steps, pass/fail status |
-| `QA-REPORT.md` | Full QA sweep results |
-| `JUDGE-REPORT.yaml` | Final judge verdict (9/10 PASS) |
-| `DELIVERY.md` | Deployment instructions |
-| `PROGRESS.md` | 323-line log of every session |
-| `.ai/core/` | Architecture docs, glossary, product overview, decision history |
-| `.infipragma/memory/` | Session logs, error patterns, handoff state |
-
-### Pipeline Stats
-
-| Metric | Value |
-|--------|-------|
-| Total sessions | 47 |
-| S5 Build sessions | 25 (one per feature) |
-| Judge reviews | 8 (one per stage) |
-| Judge pass rate | 8/8 (100%) |
-| Average judge score | 9.0/10 |
-| Retries needed | 0 |
-
----
-
-## Quick Start
-
-### Prerequisites
-
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI installed
-- `ANTHROPIC_API_KEY` set in your environment
-- `yq` installed (`brew install yq`)
-
-### 3 Steps
-
-```bash
-# 1. Clone
-git clone https://github.com/JayCheng113/InfiPragma.git
-cd InfiPragma
-
-# 2. Describe your idea
-vim .infipragma/config.yaml
-# -> Fill in "idea" and optional "hints"
-
-# 3. Launch
-chmod +x infipragma.sh
-./infipragma.sh
-```
-
-The prototype phase requires your input — InfiPragma asks clarifying questions and shows a prototype for approval. Once approved, everything else is autonomous.
-
----
-
-## Project Structure
-
-```
-InfiPragma/
-├── infipragma.sh              <- The only code (400-line bash orchestrator)
-├── CLAUDE.md                  <- Entry point for Claude Code
-├── AGENTS.md                  <- Pipeline protocol
-|
-├── .claude/agents/            <- 13 agents (pure .md)
-|   ├── infipragma-init.md
-|   ├── infipragma-research.md
-|   ├── infipragma-design.md
-|   ├── infipragma-build.md
-|   ├── infipragma-judge.md
-|   └── ...8 more
-|
-├── .infipragma/
-|   ├── config.yaml            <- Your idea + preferences
-|   ├── meta/
-|   |   ├── registry.yaml      <- Pipeline state machine
-|   |   └── handoff.yaml       <- Session-to-session continuity
-|   └── memory/
-|       ├── MEMORY.md          <- Long-term project memory
-|       ├── errors/            <- Learned error patterns
-|       └── sessions/          <- Per-session logs
-|
-├── .ai/                       <- Knowledge base (generated)
-|
-└── examples/
-    └── todoapp/               <- Complete demo output
-```
+Every stage must pass a judge review (score 7+/10) before advancing. The judge is also a `.md` file.
 
 ### What's Inside an Agent?
 
-Each `.md` file is structured natural language — no code, no config, no schema. Here's the core of `infipragma-build.md`:
+Structured natural language. Here's the essence of `infipragma-build.md`:
 
 ```markdown
 ## Task
@@ -222,67 +162,32 @@ Implement one feature per session using a build-test loop.
 - NEVER set passes=true without E2E test confirmation.
 ```
 
-The `.md` file IS the agent.
+Want to change how builds work? Edit the text. No recompile, no framework to learn.
 
 ---
 
-## Safety
+## Current Status
 
-| Mechanism | How |
-|-----------|-----|
-| **Judge gates** | Every stage scores 7+/10 to advance |
-| **Budget limits** | Per-session and total caps |
-| **Git safety net** | Every attempt tagged for rollback |
-| **Max retries** | 3 failures = blocked + notification |
-| **Docker sandbox** | Optional `--sandbox` mode |
-| **Crash recovery** | Detects incomplete sessions, resumes |
-| **Error memory** | Learns from mistakes across sessions |
+InfiPragma's core pipeline — the 13 agent `.md` files and the orchestrator — is functional and proven end-to-end (see TodoApp demo above).
 
----
+The following features exist in `infipragma.sh` but are **not yet fully tested**:
 
-## CLI
+| Feature | Status |
+|---------|--------|
+| Webhook notifications | Code exists, not validated |
+| Budget tracking / cost limits | Code exists, not validated |
+| Docker sandbox (`--sandbox`) | Dockerfile exists, not validated |
+| Git rollback on judge failure | Tags created, rollback not tested |
+| Crash recovery | Lock file logic exists, not tested |
 
-```bash
-./infipragma.sh              # Run the full pipeline
-./infipragma.sh --status     # View pipeline progress
-./infipragma.sh --once       # Run one session only
-./infipragma.sh --dry-run    # Show next action without executing
-./infipragma.sh --sandbox    # Run in Docker container
-```
-
----
-
-## Configuration
-
-```yaml
-# .infipragma/config.yaml
-idea: "Your product idea in one sentence"
-hints: "optional tech preferences"
-
-budget:
-  max_total_usd: 100
-  max_per_session_usd: 15
-
-notify:
-  webhook: "https://hooks.slack.com/..."  # optional
-
-sandbox:
-  enabled: false
-```
+These are secondary to the core value: **the `.md` content that guides Claude Code is the product**. The bash script is just glue.
 
 ---
 
 ## Inspired By
 
-[Claude Code Superpowers](https://github.com/obra/superpowers) — where `.md` files turn Claude Code into a disciplined engineer following TDD, code review, and planning workflows. InfiPragma asks: what if the entire product delivery process was a skill?
+[Claude Code Superpowers](https://github.com/obra/superpowers) proved that `.md` files can reliably control AI behavior — TDD, code review, architectural planning. InfiPragma asks: what if the entire product delivery process was a set of skills?
 
 ## License
 
 MIT
-
----
-
-<p align="center">
-<b>Markdown files are all you need.</b><br>
-<i>No framework. No SDK. No abstractions. Just .md files that deliver products.</i>
-</p>
