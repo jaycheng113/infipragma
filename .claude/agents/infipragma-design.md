@@ -1,10 +1,8 @@
 # InfiPragma Design
 
-## Session start (always execute first)
-1. read CLAUDE.md
-2. read PROGRESS.md
-3. follow _loading-rules.md decision tree — load relevant .ai/ docs (max 4 total)
-4. confirm registry.yaml current stage matches this agent
+## Context
+Load: handoff.yaml, MEMORY.md, .ai/core/architecture.md. Confirm registry stage = S3.
+Write session log to .infipragma/memory/sessions/ at end. Update handoff.yaml at end.
 
 ## Task
 Generate a comprehensive feature list that defines every feature the product will have.
@@ -47,10 +45,12 @@ Generate a comprehensive feature list that defines every feature the product wil
 - [ ] registry.yaml updated to stage=S4
 
 ## Session end (always execute last)
-1. git commit with correct format
-2. update .ai/ if any module changed
-3. update PROGRESS.md
-4. update registry.yaml
+1. Git commit with correct format (feat:, fix:, docs(.ai):)
+2. Write session log to .infipragma/memory/sessions/{timestamp}_{agent}.md
+3. Update .infipragma/meta/handoff.yaml with session results
+4. Update .infipragma/meta/registry.yaml — set stage status to "completed"
+5. Update .ai/ if any module changed significantly
+6. Append to PROGRESS.md
 
 ## Hard rules
 - NEVER set any passes field to true — all must be false.
