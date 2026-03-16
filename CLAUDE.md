@@ -14,8 +14,11 @@ InfiPragma is an autonomous product delivery harness for Claude Code. It takes a
 | Architecture | `.ai/architecture.md` | System architecture decisions |
 | Tech Stack | `.ai/tech-stack.md` | Chosen technologies and rationale |
 | Delivery Mode | `.ai/delivery-mode.md` | Deployment strategy |
-| Registry | `.ai/registry.yaml` | Pipeline state — current phase, stage, status |
-| Config | `config.yaml` | User-provided project configuration |
+| Registry | `.infipragma/meta/registry.yaml` | Pipeline state — current phase, stage, status |
+| Config | `.infipragma/config.yaml` | User-provided project configuration |
+| Handoff | `.infipragma/meta/handoff.yaml` | Session-to-session continuity data |
+| Memory | `.infipragma/memory/MEMORY.md` | Long-term project memory |
+| Error Experience | `.infipragma/memory/errors/` | Learned error patterns |
 
 ## Loading Protocol
 
@@ -38,6 +41,26 @@ Read `AGENTS.md` for the full pipeline orchestration protocol. Claude Code reads
 - Use YAML frontmatter in `.ai/` docs where applicable
 - Make separate commits for each logical change
 - Never modify `registry.yaml` outside of the orchestration protocol
+
+## Shared Agent Protocol
+
+All agents follow this protocol when running via the orchestrator:
+
+### Session Start
+1. Read `.infipragma/meta/handoff.yaml` for continuity from previous session
+2. Read `.infipragma/memory/MEMORY.md` for long-term project context
+3. Confirm `registry.yaml` current stage matches this agent
+4. Check `.infipragma/memory/errors/` for relevant past errors
+
+### Session End
+1. Git commit with correct format (`feat:`, `fix:`, `docs(.ai):`)
+2. Write session log to `.infipragma/memory/sessions/{timestamp}_{agent}.md`
+3. Update `.infipragma/meta/handoff.yaml` with session results
+4. Update `.infipragma/meta/registry.yaml` status to `completed`
+
+### On Error Resolution
+- Write error experience to `.infipragma/memory/errors/{error-id}.md`
+- Include: symptom, root cause, fix, related features
 
 ## Quick Reference
 
