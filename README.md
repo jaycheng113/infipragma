@@ -16,7 +16,7 @@ One sentence in. One deployed product out.
 
 ## The Insight
 
-Claude Code's [Superpowers skills](https://github.com/anthropics/claude-code-superpowers) proved something powerful: a well-written `.md` file can make an AI follow complex workflows as reliably as hand-coded logic. Skills like `test-driven-development.md` and `brainstorming.md` turn Claude Code into a disciplined engineer — no code required, just precise natural language instructions.
+Claude Code's [Superpowers skills](https://github.com/obra/superpowers) proved something powerful: a well-written `.md` file can make an AI follow complex workflows as reliably as hand-coded logic. Skills like `test-driven-development.md` and `brainstorming.md` turn Claude Code into a disciplined engineer — no code required, just precise natural language instructions.
 
 InfiPragma pushes this to its logical conclusion: **if one `.md` file can guide one task, can a system of `.md` files deliver an entire product?**
 
@@ -325,7 +325,7 @@ All code is local. `--sandbox` runs in Docker. Budget limits prevent runaway cos
 
 ## Inspired By
 
-The idea that `.md` files can reliably control AI behavior comes from [Claude Code Superpowers](https://github.com/anthropics/claude-code-superpowers) — a skill system where single Markdown files turn Claude Code into a disciplined engineer following TDD, code review, and architectural planning workflows.
+The idea that `.md` files can reliably control AI behavior comes from [Claude Code Superpowers](https://github.com/obra/superpowers) — a skill system where single Markdown files turn Claude Code into a disciplined engineer following TDD, code review, and architectural planning workflows.
 
 InfiPragma asks: what if the entire product delivery process was a skill?
 
