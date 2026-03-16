@@ -65,6 +65,8 @@ git clone https://github.com/JayCheng113/InfiPragma.git
 cd InfiPragma
 ```
 
+> **Warning**: A full pipeline run consumes a significant amount of tokens (47+ sessions, each with multiple tool calls). **Claude Pro or Max plan is strongly recommended.** API usage without a subscription plan may result in high costs.
+
 Open Claude Code and start talking:
 
 ```
@@ -89,7 +91,6 @@ Running through Claude Code is recommended — when the pipeline hits issues (a 
 - `ANTHROPIC_API_KEY` in your environment
 - `yq` (`brew install yq`)
 
-> **Warning**: A full pipeline run consumes a significant amount of tokens (47+ sessions, each with multiple tool calls). **Claude Pro or Max plan is strongly recommended.** API usage without a subscription plan may result in high costs.
 
 ---
 
