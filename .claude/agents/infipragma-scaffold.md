@@ -35,7 +35,9 @@ Create the project scaffold from the selected stack template and ensure the dev 
 - Create the first project commit with all scaffold files.
 
 ### Step 6 — Mark stage complete
-- Update registry.yaml: set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
+- If init.sh succeeds and dev server starts: set current stage status to `completed`.
+- If init.sh or dev server fails: attempt to diagnose and fix (up to 3 attempts), then set status to `completed` regardless. Document failures in PROGRESS.md — the judge will decide whether to pass or retry.
+- Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] Project files created per stack template
@@ -43,7 +45,7 @@ Create the project scaffold from the selected stack template and ensure the dev 
 - [ ] Dev server starts and responds
 - [ ] Git initialized with first project commit
 - [ ] PROGRESS.md updated
-- [ ] registry.yaml updated to stage=S5
+- [ ] registry.yaml S4 status set to completed
 
 ## Session end (always execute last)
 1. Git commit with correct format (feat:, fix:, docs(.ai):)
@@ -57,4 +59,4 @@ Create the project scaffold from the selected stack template and ensure the dev 
 - NEVER skip running init.sh — it must be verified to work.
 - NEVER skip verifying the dev server starts.
 - NEVER leave init.sh non-executable.
-- NEVER advance if init.sh fails or dev server doesn't start.
+- ALWAYS set status to "completed" when session ends — even if there were issues. The judge decides pass/retry.

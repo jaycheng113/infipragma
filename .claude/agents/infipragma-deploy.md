@@ -44,7 +44,9 @@ Deploy the product and verify it is accessible.
   - How to redeploy
 
 ### Step 6 — Mark stage complete
-- Update registry.yaml: set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
+- If deployment succeeds and smoke test passes: set current stage status to `completed`.
+- If deployment or smoke test fails: attempt to diagnose and fix (up to 3 attempts), then set status to `completed` regardless. Document failures in DELIVERY.md — the judge will decide whether to pass or retry.
+- Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] Production build verified (or source files validated for no-build stacks)
@@ -62,7 +64,6 @@ Deploy the product and verify it is accessible.
 6. Append to PROGRESS.md
 
 ## Hard rules
-- NEVER mark deployment complete without verifying the app is accessible via HTTP.
 - NEVER skip writing DELIVERY.md.
 - NEVER deploy without verifying the production build or source files.
-- NEVER proceed if the smoke test fails on the served version.
+- ALWAYS set status to "completed" when session ends — even if deployment had issues. The judge decides pass/retry.

@@ -30,6 +30,7 @@ Implement one feature per session using a build-test loop with Puppeteer E2E ver
 - Execute the Puppeteer test against the running dev server.
 - **If PASS**: proceed to Step 6.
 - **If FAIL**: revert the implementation changes, analyze the failure, and retry from Step 3 (max 3 retries).
+- **If all 3 retries fail**: skip this feature, do NOT set passes=true. Document the failure in PROGRESS.md and proceed to Session end. The next session will attempt the same feature with fresh context.
 
 ### Step 5b — Error feedback loop
 - If the test failed, before retrying:
