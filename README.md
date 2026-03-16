@@ -1,8 +1,18 @@
 # InfiPragma
 
-**Have an idea. Chat with Claude Code. Get a product.**
+**Markdown is all you need.**
 
-InfiPragma is a set of `.md` files that guide Claude Code through a complete product delivery pipeline — from market research to deployment. You don't write code. You don't manage tasks. You just describe what you want to build, discuss it with Claude Code, and walk away.
+No Python. No framework. No SDK. InfiPragma is a set of `.md` files that guide Claude Code through a complete product delivery pipeline — from market research to deployment. The entire system is plain text: 13 Markdown files define 13 agents, a short bash script chains them together. That's it.
+
+You don't write code. You don't manage tasks. You just describe what you want to build, discuss it with Claude Code, and walk away.
+
+| System | Agent Defined By | To Modify It |
+|--------|-----------------|--------------|
+| OpenHands | Python classes + event handlers | Write Python |
+| SWE-agent | Python + ACI config | Write Python |
+| AI Scientist | Python pipeline | Write Python |
+| Devin | Closed source | You can't |
+| **InfiPragma** | **`.md` files** | **Edit text** |
 
 ---
 
