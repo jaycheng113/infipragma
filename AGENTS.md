@@ -6,7 +6,7 @@ Claude Code reads this file at the start of every session to determine what to d
 
 ### Step 1: Read Registry
 
-Read `.ai/registry.yaml` to get the current pipeline state:
+Read `.infipragma/meta/registry.yaml` to get the current pipeline state:
 - `phase` — one of: `prototype`, `build`, `maintenance`
 - `current_stage` — the active stage (e.g., `S0`, `S3`, `S7`)
 - `status` — `pending`, `in_progress`, `judging`, `passed`, `failed`
@@ -51,7 +51,7 @@ Check `maintenance.mode` in registry.yaml and route:
 
 1. Load the agent file from `.claude/agents/{agent-name}.md`
 2. Execute the agent's instructions
-3. Update `.ai/registry.yaml` with the result (advance stage, record status)
+3. Update `.infipragma/meta/registry.yaml` with the result (advance stage, record status)
 4. Return to Step 1 for the next iteration
 
 ## Judge Gates
@@ -66,3 +66,32 @@ After each build stage completes, run the `infipragma-judge` agent before advanc
 
 - **Never skip stages.** Stages must execute in order: S0 → S1 → S2 → S3 → S4 → S5 → S6 → S7.
 - **Never run two agents in parallel.** One agent runs at a time. Complete it, judge it, then move on.
+
+## Status Values
+
+| Status | Meaning |
+|--------|---------|
+| `pending` | Stage has not started |
+| `in_progress` | Agent is currently working on this stage |
+| `completed` | Agent finished work, awaiting judge validation |
+| `judging` | Judge agent is validating |
+| `passed` | Judge approved — ready to advance |
+| `failed` | Judge rejected — will retry |
+| `blocked` | Max retries exceeded — requires human intervention |
+
+## External Orchestrator
+
+When running unattended via `infipragma.sh`:
+- The orchestrator reads `registry.yaml` and routes to the correct agent
+- Agents should set their stage status to `completed` when done (not `passed`)
+- The judge agent decides `passed` or `failed`
+- Only the orchestrator advances `current_stage` to the next stage
+- On failure, the orchestrator increments `stages.{stage}.retries`
+- After `max_retries` failures, status is set to `blocked`
+
+## Error Feedback Protocol
+
+When an agent encounters and resolves a non-trivial error:
+1. Write the error details to `.infipragma/memory/errors/{error-id}.md`
+2. Include: symptom, root cause, fix, and related features
+3. Future agents check this directory before starting work
