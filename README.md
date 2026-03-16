@@ -66,6 +66,8 @@ cd InfiPragma
 ```
 
 > **Warning**: A full pipeline run consumes a significant amount of tokens (47+ sessions, each with multiple tool calls). **Claude Pro or Max plan is strongly recommended.** API usage without a subscription plan may result in high costs.
+>
+> **Tip**: Use `claude --dangerously-skip-permissions` to run without permission prompts. The pipeline involves hundreds of tool calls — approving each one manually is impractical.
 
 Open Claude Code and start talking:
 
