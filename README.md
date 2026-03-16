@@ -22,9 +22,8 @@ It came back with this:
 A fully functional todo app — 3 source files, zero dependencies, works offline.
 
 <p align="center">
-  <img src="docs/screenshots/light.png" width="270" alt="Light mode">
-  <img src="docs/screenshots/dark.png" width="270" alt="Dark mode">
-  <img src="docs/screenshots/mobile.png" width="270" alt="Mobile responsive">
+  <img src="docs/screenshots/light.png" width="380" alt="Light mode">
+  <img src="docs/screenshots/dark.png" width="380" alt="Dark mode">
 </p>
 
 | Feature Tier | Count | Includes |
