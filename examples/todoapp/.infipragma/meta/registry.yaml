@@ -1,0 +1,29 @@
+# InfiPragma Pipeline State
+# This file is managed automatically by the orchestration system.
+# Do not edit manually unless you know what you're doing.
+
+phase: "maintenance"
+current_stage: "S7"
+stages:
+  S0: {status: passed, retries: 0}
+  S1: {status: passed, retries: 0}
+  S2: {status: passed, retries: 0, delivery_mode: staticsite, stack: "vanilla-html-css-js"}
+  S3: {status: passed, retries: 0}
+  S4: {status: passed, retries: 0}
+  S5: {status: passed, retries: 0, features_total: 25, features_passing: 25}
+  S6: {status: passed, retries: 0}
+  S7: {status: passed, retries: 0, live_url: "file:///Users/zcheng256/InfiPragma/test-project/dist/index.html"}
+maintenance:
+  mode: idle
+  last_audit: null
+  next_audit: null
+  open_items: 0
+orchestration:
+  retry_count: 0
+  max_retries: 3
+  last_agent: infipragma-judge
+  last_run: "2026-03-16T08:10:00Z"
+  last_exit_code: 0
+  session_timeout: 1800
+  total_cost: 0.0
+  total_sessions: 47

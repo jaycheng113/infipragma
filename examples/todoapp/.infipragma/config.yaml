@@ -1,0 +1,22 @@
+# InfiPragma Configuration
+# Fill in your idea and optional hints, then tell Claude Code to start.
+
+idea: "A simple todo list web app with add, complete, and delete tasks"
+hints: "use vanilla HTML/CSS/JS, no framework, single page"
+
+notify:
+  telegram: ""            # Optional: bot token for Telegram notifications
+  email: ""               # Optional: email address for notifications
+  webhook: ""             # Optional: Slack/Discord/custom webhook URL
+  on_stage_pass: true     # Notify when a stage passes judge
+  on_failure: true        # Notify on failures
+  on_deploy: true         # Notify when product is deployed
+
+budget:
+  max_total_usd: 100      # Total budget for the entire pipeline
+  max_per_session_usd: 15 # Per-session spending limit
+  warn_at_percent: 80     # Warn when this % of budget is used
+
+sandbox:
+  enabled: false          # Run agents in Docker container
+  image: "infipragma-sandbox"

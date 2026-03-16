@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoApp</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>TodoApp</h1>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </header>
+    <main role="main" aria-label="Task management">
+      <form id="task-form" class="task-input" role="search" aria-label="Add new task">
+        <input
+          type="text"
+          id="task-input"
+          placeholder="What needs to be done?"
+          autocomplete="off"
+          aria-label="New task text"
+        >
+        <button type="submit" id="add-btn" aria-label="Add task">Add</button>
+      </form>
+      <div id="filter-bar" class="filter-bar" role="toolbar" aria-label="Filter tasks">
+        <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-filter="active" aria-pressed="false">Active</button>
+        <button class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+      </div>
+      <div id="toggle-all-container" class="toggle-all-container hidden">
+        <label class="toggle-all-label">
+          <input type="checkbox" id="toggle-all" class="toggle-all-checkbox" aria-label="Toggle all tasks complete">
+          <span>Mark all as complete</span>
+        </label>
+      </div>
+      <ul id="task-list" class="task-list" role="list" aria-label="Task list"></ul>
+      <p id="empty-state" class="empty-state" role="status">No tasks yet. Add one above!</p>
+      <div id="task-footer" class="task-footer hidden">
+        <span id="task-counter" class="task-counter" role="status" aria-live="polite"></span>
+        <button id="clear-completed-btn" class="clear-completed-btn hidden" aria-label="Clear completed tasks">Clear completed</button>
+      </div>
+      <div id="status-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+      <div class="export-import-bar">
+        <button id="export-btn" class="ei-btn" aria-label="Export tasks as JSON">Export JSON</button>
+        <label class="ei-btn ei-import-label" tabindex="0" role="button" aria-label="Import tasks from JSON file">
+          Import JSON
+          <input type="file" id="import-input" accept=".json,application/json" hidden aria-hidden="true">
+        </label>
+      </div>
+    </main>
+    <footer>
+      <p class="footer-text">TodoApp — Zero dependencies, pure simplicity.</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

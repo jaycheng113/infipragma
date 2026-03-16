@@ -1,0 +1,352 @@
+[
+  {
+    "id": "core-add-task",
+    "category": "core",
+    "priority": 1,
+    "module": "task-input",
+    "description": "User can add a new task via text input field",
+    "steps": [
+      "Create text input element with placeholder",
+      "Add submit button next to input",
+      "Handle form submission to create task object",
+      "Append new task to task array in memory",
+      "Clear input field after submission",
+      "Re-render task list"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-display-tasks",
+    "category": "core",
+    "priority": 2,
+    "module": "task-list",
+    "description": "Display all tasks in a scrollable list with text and status",
+    "steps": [
+      "Create task list container element",
+      "Render each task as a list item with text content",
+      "Show completion status visually (checkbox or strikethrough)",
+      "Update list on any data change"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-complete-task",
+    "category": "core",
+    "priority": 3,
+    "module": "task-list",
+    "description": "User can toggle a task between active and completed states",
+    "steps": [
+      "Add checkbox or clickable element per task",
+      "Toggle completed boolean on click",
+      "Apply visual distinction (strikethrough, muted color) for completed tasks",
+      "Persist updated state"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-delete-task",
+    "category": "core",
+    "priority": 4,
+    "module": "task-list",
+    "description": "User can delete a task permanently from the list",
+    "steps": [
+      "Add delete button per task item",
+      "Remove task from array on click",
+      "Re-render task list",
+      "Persist updated state"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-localstorage-persist",
+    "category": "core",
+    "priority": 5,
+    "module": "storage",
+    "description": "Tasks persist in localStorage across page reloads",
+    "steps": [
+      "Save task array to localStorage as JSON on every mutation",
+      "Load tasks from localStorage on page load",
+      "Handle missing or corrupt localStorage data gracefully"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-unique-ids",
+    "category": "core",
+    "priority": 6,
+    "module": "storage",
+    "description": "Each task receives a unique ID for reliable identification",
+    "steps": [
+      "Generate unique ID using Date.now() or crypto.randomUUID()",
+      "Assign ID at task creation time",
+      "Use ID for all task lookup, update, and delete operations"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-input-validation",
+    "category": "core",
+    "priority": 7,
+    "module": "task-input",
+    "description": "Prevent adding empty or whitespace-only tasks",
+    "steps": [
+      "Trim input value before processing",
+      "Reject empty strings silently or with visual hint",
+      "Keep focus on input field after rejection"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-empty-state",
+    "category": "core",
+    "priority": 8,
+    "module": "task-list",
+    "description": "Show a friendly message when no tasks exist",
+    "steps": [
+      "Detect when task array is empty",
+      "Display placeholder message (e.g. 'No tasks yet')",
+      "Hide placeholder when tasks are added"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-single-page-layout",
+    "category": "core",
+    "priority": 9,
+    "module": "layout",
+    "description": "Single-page layout with centered card containing input and task list",
+    "steps": [
+      "Create semantic HTML structure (header, main, footer)",
+      "Center content with max-width container",
+      "Style as a clean card with padding and subtle shadow",
+      "Add app title/heading"
+    ],
+    "passes": true
+  },
+  {
+    "id": "core-enter-to-submit",
+    "category": "core",
+    "priority": 10,
+    "module": "task-input",
+    "description": "Pressing Enter in the input field adds the task",
+    "steps": [
+      "Listen for keydown event on input",
+      "Trigger add-task on Enter key",
+      "Prevent default form submission behavior"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-filter-tasks",
+    "category": "enhanced",
+    "priority": 11,
+    "module": "task-filter",
+    "description": "Filter task list by All, Active, or Completed status",
+    "steps": [
+      "Add filter buttons (All / Active / Completed)",
+      "Track current filter state",
+      "Filter displayed tasks based on selected filter",
+      "Highlight active filter button"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-task-counter",
+    "category": "enhanced",
+    "priority": 12,
+    "module": "task-list",
+    "description": "Display count of remaining active tasks",
+    "steps": [
+      "Calculate number of incomplete tasks",
+      "Display count in footer area (e.g. '3 items left')",
+      "Update count on every task change"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-clear-completed",
+    "category": "enhanced",
+    "priority": 13,
+    "module": "task-list",
+    "description": "Button to remove all completed tasks at once",
+    "steps": [
+      "Add 'Clear completed' button in footer area",
+      "Filter out all tasks with completed=true",
+      "Re-render and persist updated list",
+      "Hide button when no completed tasks exist"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-edit-task",
+    "category": "enhanced",
+    "priority": 14,
+    "module": "task-list",
+    "description": "Double-click a task to edit its text inline",
+    "steps": [
+      "Detect double-click on task text",
+      "Replace text with editable input field",
+      "Save on Enter or blur",
+      "Cancel on Escape, restoring original text",
+      "Persist updated text"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-responsive-design",
+    "category": "enhanced",
+    "priority": 15,
+    "module": "layout",
+    "description": "Responsive layout that works well on mobile, tablet, and desktop",
+    "steps": [
+      "Add viewport meta tag",
+      "Use fluid widths and relative units",
+      "Add media queries for small screens",
+      "Ensure touch-friendly tap targets (min 44px)"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-drag-reorder",
+    "category": "enhanced",
+    "priority": 16,
+    "module": "task-list",
+    "description": "Reorder tasks via drag and drop",
+    "steps": [
+      "Add draggable attribute to task items",
+      "Implement dragstart, dragover, drop event handlers",
+      "Visual feedback during drag (placeholder, opacity change)",
+      "Update task array order and persist"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-export-import",
+    "category": "enhanced",
+    "priority": 17,
+    "module": "storage",
+    "description": "Export tasks as JSON file and import from JSON file",
+    "steps": [
+      "Add export button that triggers JSON file download",
+      "Add import button with file input",
+      "Validate imported JSON structure",
+      "Merge or replace current tasks on import",
+      "Persist imported data"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-task-timestamps",
+    "category": "enhanced",
+    "priority": 18,
+    "module": "task-list",
+    "description": "Show creation date for each task",
+    "steps": [
+      "Add createdAt field to task data model",
+      "Record timestamp at task creation",
+      "Display relative or absolute date below task text",
+      "Update localStorage schema"
+    ],
+    "passes": true
+  },
+  {
+    "id": "enhanced-select-all-toggle",
+    "category": "enhanced",
+    "priority": 19,
+    "module": "task-list",
+    "description": "Toggle all tasks between complete and active with one click",
+    "steps": [
+      "Add toggle-all checkbox above task list",
+      "If any tasks are active, mark all as completed",
+      "If all tasks are completed, mark all as active",
+      "Update visual state and persist"
+    ],
+    "passes": true
+  },
+  {
+    "id": "polish-dark-mode",
+    "category": "polish",
+    "priority": 20,
+    "module": "layout",
+    "description": "Toggle between light and dark color themes",
+    "steps": [
+      "Define CSS custom properties for light and dark themes",
+      "Add theme toggle button in header",
+      "Apply dark class to body and restyle all elements",
+      "Persist theme preference in localStorage",
+      "Respect prefers-color-scheme media query as default"
+    ],
+    "passes": true
+  },
+  {
+    "id": "polish-animations",
+    "category": "polish",
+    "priority": 21,
+    "module": "layout",
+    "description": "Smooth CSS transitions for adding, completing, and deleting tasks",
+    "steps": [
+      "Add fade-in animation for new tasks",
+      "Add strikethrough transition for completing tasks",
+      "Add fade-out or slide-out animation for deleted tasks",
+      "Use CSS transitions and keyframes only (no JS animation libraries)"
+    ],
+    "passes": true
+  },
+  {
+    "id": "polish-accessibility",
+    "category": "polish",
+    "priority": 22,
+    "module": "layout",
+    "description": "Full keyboard navigation and ARIA attributes for screen readers",
+    "steps": [
+      "Add ARIA roles and labels to interactive elements",
+      "Ensure all actions are keyboard-accessible (Tab, Enter, Space, Escape)",
+      "Add focus-visible styles for keyboard navigation",
+      "Use semantic HTML elements (button, input, ul/li)",
+      "Announce dynamic changes with aria-live regions"
+    ],
+    "passes": true
+  },
+  {
+    "id": "polish-favicon-title",
+    "category": "polish",
+    "priority": 23,
+    "module": "layout",
+    "description": "Custom favicon and dynamic page title showing task count",
+    "steps": [
+      "Create simple SVG or emoji favicon",
+      "Link favicon in HTML head",
+      "Update document.title to show active task count (e.g. '(3) TodoApp')",
+      "Update title on every task change"
+    ],
+    "passes": true
+  },
+  {
+    "id": "polish-hover-states",
+    "category": "polish",
+    "priority": 24,
+    "module": "layout",
+    "description": "Subtle hover and focus effects on all interactive elements",
+    "steps": [
+      "Add hover styles to buttons (opacity, color shift)",
+      "Add hover reveal for delete button (hidden until hover)",
+      "Add focus ring styles for input fields",
+      "Ensure transitions are smooth (150-200ms)"
+    ],
+    "passes": true
+  },
+  {
+    "id": "polish-print-styles",
+    "category": "polish",
+    "priority": 25,
+    "module": "layout",
+    "description": "Print-friendly stylesheet for printing the task list",
+    "steps": [
+      "Add @media print CSS rules",
+      "Hide interactive elements (buttons, input field)",
+      "Show clean task list with checkboxes",
+      "Remove shadows, backgrounds, and decorative elements"
+    ],
+    "passes": true
+  }
+]

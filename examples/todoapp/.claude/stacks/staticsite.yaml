@@ -1,0 +1,21 @@
+name: Static Site
+delivery_mode: staticsite
+stack:
+  framework: Astro
+  language: TypeScript
+  styling: Tailwind CSS
+  deployment: Netlify
+structure:
+  src_dir: src/
+  pages_dir: src/pages/
+  components_dir: src/components/
+  layouts_dir: src/layouts/
+  content_dir: src/content/
+init_commands:
+  - npm create astro@latest . -- --template basics --typescript strict --no-install
+  - npm install
+  - npx astro add tailwind -y
+deploy_command: netlify deploy --prod
+dev_command: npm run dev
+build_command: npm run build
+test_command: npx playwright test
