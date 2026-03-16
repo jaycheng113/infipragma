@@ -46,33 +46,29 @@ next_action: "what should happen next"
 
 ## Stage transition criteria
 
-### S0 (Clarification) -> S1 (Init)
-- SPEC.md exists and is non-empty
-- prototype.html exists
+### S0 (Init) -> S1 (Research)
+- CLAUDE.md updated for the product (not just the harness template)
+- .ai/core/product-overview.md exists and is non-empty
+- .ai/core/architecture.md exists (placeholder OK at this stage)
+- .ai/core/glossary.md exists with at least 3 terms
 - registry.yaml shows phase=build, stage=S0
 
-### S1 (Init) -> S2 (Research)
-- CLAUDE.md updated for the product
-- .ai/core/product-overview.md exists
-- .ai/core/architecture.md exists
-- .ai/core/glossary.md exists
-
-### S2 (Research) -> S3 (Delivery Mode)
+### S1 (Research) -> S2 (Delivery Mode)
 - MARKET.md exists with min 3 competitors
 - ADR entry in .ai/core/history.md
 
-### S3 (Delivery Mode) -> S4 (Design)
+### S2 (Delivery Mode) -> S3 (Design)
 - ADR for delivery mode in .ai/core/history.md
 - .ai/core/architecture.md updated (not placeholder)
 - registry.yaml has delivery_mode and stack fields
 
-### S4 (Design) -> S5 (Scaffold)
+### S3 (Design) -> S4 (Scaffold)
 - feature_list.json exists with 20+ features
 - All features have required fields (id, category, priority, module, description, steps, passes)
 - All passes=false
 - Features categorized as core/enhanced/polish
 
-### S5 (Scaffold) -> S6 (Build -> QA)
+### S4 (Scaffold) -> S5 (Build)
 - init.sh exists and is executable
 - Dev server starts successfully
 - Git initialized with at least one commit
