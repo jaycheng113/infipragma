@@ -6,7 +6,7 @@ You have an idea. You don't want to research the market. You don't want to pick 
 
 InfiPragma does all of that — autonomously. Market research, architecture design, feature planning, implementation, E2E testing, quality assurance, deployment. From a single sentence to a working, differentiated product demo. No manual steps in between.
 
-**No Python. No framework. No SDK. Markdown is all you need.**
+**No massive codebase. No framework. No SDK. Just Markdown + Claude Code = full automation.**
 
 The entire system is 13 `.md` files. Each one is a specialized agent — written in plain English, readable by anyone, editable with any text editor. A short bash script chains them together. That's the whole thing.
 
