@@ -1,0 +1,17 @@
+# Session-to-session handoff data
+# Written by each agent at session end, read by next agent at session start
+
+last_session:
+  agent: null
+  timestamp: null
+  exit_status: null
+  summary: "No sessions recorded yet"
+  files_modified: []
+  next_action: "Start pipeline"
+  errors_encountered: []
+  warnings: []
+context_snapshot:
+  features_passing: 0
+  features_total: 0
+  current_stage: "clarification"
+  git_sha: null
