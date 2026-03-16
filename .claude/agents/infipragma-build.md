@@ -71,7 +71,10 @@ Implement one feature per session using a build-test loop with Puppeteer E2E ver
 1. Git commit with correct format (feat:, fix:, docs(.ai):)
 2. Write session log to .infipragma/memory/sessions/{timestamp}_{agent}.md
 3. Update .infipragma/meta/handoff.yaml with session results
-4. Update .infipragma/meta/registry.yaml — set stage status to "completed"
+4. Update .infipragma/meta/registry.yaml:
+   - Count core features with `passes: true` in feature_list.json
+   - If ALL core features pass: set stage status to `completed`
+   - If NOT all core features pass: set stage status to `in_progress`
 5. Update .ai/ if any module changed significantly
 6. Append to PROGRESS.md
 
