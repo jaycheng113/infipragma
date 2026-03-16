@@ -1,22 +1,56 @@
 # InfiPragma
 
-**One idea in. One deployed product out.**
+**Markdown files are all you need.**
 
-InfiPragma is an autonomous product delivery engine powered by Claude Code. You describe what you want to build in one sentence, walk away, and come back to a fully deployed, production-ready product — complete with tests, documentation, and live URL.
+Every AI coding agent out there is built with Python frameworks, TypeScript SDKs, and complex abstractions. InfiPragma takes a radically different approach: the entire system is just `.md` files.
 
-No coding required. No babysitting. No "prompt engineering."
+13 Markdown files define 13 specialized agents. A shell script chains them together. That's the whole thing. No framework. No dependencies. No vendor lock-in. Just text files that tell Claude Code what to do — and it does it, autonomously, from your idea to a deployed product.
 
 ```
 idea: "A real-time collaborative whiteboard for remote teams"
 ```
 
-That's it. InfiPragma handles everything else.
+One sentence in. One deployed product out.
+
+---
+
+## The Insight
+
+Claude Code's [Superpowers skills](https://github.com/anthropics/claude-code-superpowers) proved something powerful: a well-written `.md` file can make an AI follow complex workflows as reliably as hand-coded logic. Skills like `test-driven-development.md` and `brainstorming.md` turn Claude Code into a disciplined engineer — no code required, just precise natural language instructions.
+
+InfiPragma pushes this to its logical conclusion: **if one `.md` file can guide one task, can a system of `.md` files deliver an entire product?**
+
+The answer is yes.
+
+```
+Traditional Agent Framework          InfiPragma
+─────────────────────────           ──────────
+Python classes                      Markdown files
+Event handlers                      Step-by-step instructions
+Plugin APIs                         Plain text
+pip install + config                git clone
+"Read the docs"                     Read the .md — it IS the agent
+```
+
+### Why This Matters
+
+Every other autonomous agent requires you to be a developer to understand, modify, or debug it:
+
+| System | Agent Defined By | To Modify It |
+|--------|-----------------|--------------|
+| OpenHands | Python classes + event handlers | Write Python |
+| SWE-agent | Python + ACI config | Write Python |
+| AI Scientist | Python pipeline | Write Python |
+| Devin | Closed source | You can't |
+| **InfiPragma** | **`.md` files** | **Edit text** |
+
+Want to change how the Build agent handles test failures? Open `infipragma-build.md`, find "Step 5b", edit the text. Done. No recompile, no redeploy, no understanding a framework.
 
 ---
 
 ## How It Works
 
-InfiPragma chains multiple Claude Code sessions together through a shell orchestrator, turning a single AI model into a full engineering team with persistent memory, quality gates, and automatic error recovery.
+A 400-line bash script reads the pipeline state, picks the right `.md` file, feeds it to Claude Code in headless mode, and loops. The intelligence lives entirely in the Markdown.
 
 ```
 Your Idea
@@ -24,19 +58,22 @@ Your Idea
    ▼
 ┌──────────────────────────────────────────────────────┐
 │                   infipragma.sh                      │
-│                  (Orchestrator)                       │
+│          (400 lines of bash — the only code)          │
+│                                                      │
+│  Read state → Pick .md agent → claude -p → Loop      │
 │                                                      │
 │  ┌────────┐  ┌──────────┐  ┌────────┐  ┌─────────┐  │
 │  │Research│→ │  Design  │→ │ Build  │→ │ Deploy  │  │
+│  │  .md   │  │   .md    │  │  .md   │  │   .md   │  │
 │  └────┬───┘  └────┬─────┘  └───┬────┘  └────┬────┘  │
-│       │           │            │             │       │
 │       ▼           ▼            ▼             ▼       │
 │    ┌─────┐     ┌─────┐     ┌─────┐      ┌─────┐    │
 │    │Judge│     │Judge│     │Judge│      │Judge│    │
+│    │ .md │     │ .md │     │ .md │      │ .md │    │
 │    └─────┘     └─────┘     └─────┘      └─────┘    │
 │                                                      │
 │  ┌─────────────────────────────────────────────┐     │
-│  │  Memory System (cross-session persistence)  │     │
+│  │  Memory (.md files for cross-session state)  │     │
 │  └─────────────────────────────────────────────┘     │
 └──────────────────────────────────────────────────────┘
    │
@@ -46,18 +83,18 @@ Live Product + Maintenance Mode
 
 ### The Pipeline
 
-| Stage | Agent | What Happens |
-|-------|-------|-------------|
-| S0 | Init | Project setup, architecture docs |
-| S1 | Research | Market research, feasibility, API discovery |
-| S2 | Delivery Mode | Choose deployment strategy (Vercel, Docker, etc.) |
-| S3 | Design | System architecture, component design |
-| S4 | Scaffold | Project skeleton, dependencies, dev environment |
-| S5 | Build | Implement features one by one with E2E tests |
-| S6 | QA | Full test suite, linting, final validation |
-| S7 | Deploy | Build, deploy, verify live URL |
+| Stage | Agent (.md file) | What Happens |
+|-------|-----------------|-------------|
+| S0 | `infipragma-init.md` | Project setup, architecture docs |
+| S1 | `infipragma-research.md` | Market research, feasibility, API discovery |
+| S2 | `infipragma-delivery-mode.md` | Choose deployment strategy |
+| S3 | `infipragma-design.md` | System architecture, component design |
+| S4 | `infipragma-scaffold.md` | Project skeleton, dependencies, dev environment |
+| S5 | `infipragma-build.md` | Implement features one by one with E2E tests |
+| S6 | `infipragma-qa.md` | Full test suite, linting, final validation |
+| S7 | `infipragma-deploy.md` | Build, deploy, verify live URL |
 
-Every stage is validated by a **Judge agent** that scores the work (0-10) and blocks progression if quality is below threshold. No cutting corners.
+Every stage is validated by `infipragma-judge.md` — a quality gate that scores the work (0-10) and blocks progression if quality is below 7. No cutting corners.
 
 ---
 
@@ -68,13 +105,12 @@ Every stage is validated by a **Judge agent** that scores the work (0-10) and bl
 - [Claude Code](https://claude.ai/code) CLI installed
 - `ANTHROPIC_API_KEY` set in your environment
 - `yq` installed (`brew install yq`)
-- `bc` installed (pre-installed on most systems)
 
 ### 3 Steps
 
 ```bash
 # 1. Clone
-git clone https://github.com/your-org/InfiPragma.git
+git clone https://github.com/JayCheng113/InfiPragma.git
 cd InfiPragma
 
 # 2. Describe your idea
@@ -86,95 +122,131 @@ chmod +x infipragma.sh
 ./infipragma.sh
 ```
 
-That's it. Go grab a coffee. Or a nap.
-
-### Interactive Mode (Prototype Phase)
-
-The first phase requires your input — InfiPragma will ask clarifying questions and show you a prototype for approval. Just run Claude Code normally:
+The first phase (prototype) requires your input — InfiPragma asks clarifying questions and shows a prototype for approval:
 
 ```bash
-claude
+claude  # Interactive mode for prototype phase
 ```
 
-Once you approve the prototype, switch to autonomous mode:
+Once approved, everything else is autonomous:
 
 ```bash
-./infipragma.sh
+./infipragma.sh  # Hands-off from here
 ```
 
 ---
 
-## What Makes This Different
+## .md-Driven Architecture
 
-### Persistent Memory
+The entire system is transparent. Every decision the AI makes is guided by text you can read.
 
-AI agents forget everything between sessions. InfiPragma doesn't.
-
-- **MEMORY.md** — Long-term project knowledge that accumulates across sessions
-- **handoff.yaml** — Structured session-to-session continuity data
-- **errors/** — Learned error patterns that prevent repeating mistakes
-- **sessions/** — Full session logs for audit trail
-
-### Quality Gates, Not YOLO Shipping
-
-Every stage must pass a Judge agent before progressing. The Judge:
-- Checks specific criteria for each stage transition
-- Scores from 0-10 (must score 7+ to pass)
-- Blocks on any critical issue
-- Cannot be bribed, bypassed, or sweet-talked
-
-### Self-Healing Error Loop
-
-When something breaks, InfiPragma doesn't just retry blindly:
-
-1. Documents the error (symptom, root cause, fix)
-2. Checks if a similar error was solved before
-3. Applies the learned fix or diagnoses from scratch
-4. Gets smarter with every failure
-
-### Cost Control
-
-Set your budget. InfiPragma respects it.
-
-```yaml
-budget:
-  max_total_usd: 100      # Total budget cap
-  max_per_session_usd: 15  # Per-session limit
-  warn_at_percent: 80      # Warning threshold
+```
+InfiPragma/
+├── infipragma.sh              ← The only code (bash orchestrator)
+├── CLAUDE.md                  ← Entry point — tells Claude Code how to start
+├── AGENTS.md                  ← Pipeline protocol — how agents chain together
+│
+├── .claude/agents/            ← The 13 agents (pure .md)
+│   ├── infipragma-init.md         "Set up the project like this..."
+│   ├── infipragma-research.md     "Research the market like this..."
+│   ├── infipragma-design.md       "Design the architecture like this..."
+│   ├── infipragma-build.md        "Build one feature at a time like this..."
+│   ├── infipragma-judge.md        "Score the work against these criteria..."
+│   └── ...8 more
+│
+├── .infipragma/
+│   ├── config.yaml            ← Your idea + preferences
+│   ├── meta/
+│   │   ├── registry.yaml      ← Pipeline state (what stage we're on)
+│   │   └── handoff.yaml       ← What the last session did, what's next
+│   └── memory/
+│       ├── MEMORY.md          ← What the project has learned so far
+│       ├── errors/            ← Mistakes made and how they were fixed
+│       └── sessions/          ← Log of every session
+│
+└── .ai/                       ← Knowledge base (generated during pipeline)
+    ├── architecture.md
+    ├── tech-stack.md
+    └── ...
 ```
 
-Typical cost: **$50–200** from idea to deployed product.
+### What's Inside an Agent?
 
-### Crash Recovery
+Each agent `.md` file is structured natural language. Here's the essence of `infipragma-build.md`:
 
-Power went out? Machine rebooted? No problem.
+```markdown
+## Context
+Load: handoff.yaml, MEMORY.md, errors/ (scan for relevant errors).
+Confirm registry stage = S5.
 
-InfiPragma detects incomplete sessions, safely stashes uncommitted work, and resumes from the last stable state. Every attempt is git-tagged for easy rollback.
+## Task
+Implement one feature per session using a build-test loop.
+
+### Step 1 — Environment setup
+- Run init.sh to ensure dependencies are current.
+- Start the dev server in the background.
+
+### Step 2 — Select next feature
+- Read feature_list.json.
+- Find the highest-priority feature where passes is false.
+
+### Step 3 — Implement the feature
+...
+
+### Step 5b — Error feedback loop
+- Write the error to .infipragma/memory/errors/{error-id}.md
+- Check errors/ for similar past errors
+- If found: apply the documented fix approach
+- If new: diagnose, fix, document for future reference
+
+## Hard rules
+- NEVER implement more than ONE feature per session.
+- NEVER set passes=true without E2E test confirmation.
+```
+
+No abstractions. No indirection. The `.md` file IS the agent.
 
 ---
 
-## Configuration
+## How It Compares
 
-```yaml
-# .infipragma/config.yaml
+### vs. Framework-Based Agents (OpenHands, SWE-agent)
 
-idea: "A real-time collaborative whiteboard for remote teams"
-hints: "prefer Next.js, must support mobile"
+They solve single tasks (fix a bug, resolve an issue). InfiPragma delivers complete products through an 8-stage pipeline. They require Python to customize. InfiPragma requires a text editor.
 
-notify:
-  webhook: "https://hooks.slack.com/..."  # Slack/Discord notifications
-  on_stage_pass: true
-  on_failure: true
-  on_deploy: true
+### vs. Session Loopers (continuous-claude, claude-loop)
 
-budget:
-  max_total_usd: 100
-  max_per_session_usd: 15
-  warn_at_percent: 80
+They're `while true → claude → commit` — no structure, no quality gates, no memory. InfiPragma has staged progression, judge validation, error learning, and crash recovery.
 
-sandbox:
-  enabled: false  # Run in Docker for isolation
-```
+### vs. Devin
+
+Closest in ambition, but closed-source and $20/month. InfiPragma is open, transparent, and customizable. You can read every instruction the AI follows.
+
+### vs. AI Scientist / AutoResearch
+
+Narrow scope (papers / ML experiments). InfiPragma is general-purpose product delivery.
+
+### The Real Difference
+
+Every other system encodes agent behavior in code. Code is opaque to non-developers, brittle to change, and tightly coupled to its runtime.
+
+InfiPragma encodes agent behavior in Markdown. Markdown is readable by everyone, editable with any text editor, and completely decoupled from execution. The `.md` file doesn't care if it's run by Claude, GPT, or a future model that doesn't exist yet.
+
+**The framework is the bottleneck. The `.md` file is the product.**
+
+---
+
+## Built-In Safety
+
+| Mechanism | How It Works |
+|-----------|-------------|
+| **Judge gates** | Every stage must score 7+/10 before advancing |
+| **Budget limits** | Per-session and total caps, 80% warning |
+| **Git safety net** | Every attempt tagged, instant rollback |
+| **Max retries** | 3 failures = blocked, notifies you |
+| **Docker sandbox** | Optional isolated execution (`--sandbox`) |
+| **Crash recovery** | Detects incomplete sessions, resumes safely |
+| **Error memory** | Learns from mistakes, never repeats them |
 
 ---
 
@@ -187,8 +259,6 @@ sandbox:
 ./infipragma.sh --dry-run    # Show next action without executing
 ./infipragma.sh --sandbox    # Run agents in Docker container
 ```
-
-### Status Output
 
 ```
 ========================================
@@ -207,107 +277,57 @@ Total sessions: 12
   S6  QA              [PENDING]
   S7  Deploy          [PENDING]
 ----------------------------------------
-Last agent: infipragma-build
-Last run: 2026-03-15T14:30:00Z
-========================================
 ```
 
 ---
 
-## Architecture
+## Configuration
 
-```
-InfiPragma/
-├── infipragma.sh              ← Orchestrator (the engine)
-├── CLAUDE.md                  ← Entry point for Claude Code
-├── AGENTS.md                  ← Pipeline protocol
-│
-├── .claude/agents/            ← 13 specialized agent definitions
-│   ├── infipragma-build.md
-│   ├── infipragma-judge.md
-│   ├── infipragma-deploy.md
-│   └── ...
-│
-├── .infipragma/
-│   ├── config.yaml            ← Your configuration
-│   ├── notify.sh              ← Notification helper
-│   ├── Dockerfile             ← Sandbox image
-│   ├── meta/
-│   │   ├── registry.yaml      ← Pipeline state machine
-│   │   └── handoff.yaml       ← Session continuity
-│   ├── memory/
-│   │   ├── MEMORY.md          ← Long-term knowledge
-│   │   ├── errors/            ← Learned error patterns
-│   │   └── sessions/          ← Session logs
-│   └── logs/                  ← Orchestrator logs
-│
-└── .ai/                       ← Knowledge base (generated)
-    ├── architecture.md
-    ├── tech-stack.md
-    └── ...
+```yaml
+# .infipragma/config.yaml
+
+idea: "A real-time collaborative whiteboard for remote teams"
+hints: "prefer Next.js, must support mobile"
+
+budget:
+  max_total_usd: 100
+  max_per_session_usd: 15
+
+notify:
+  webhook: "https://hooks.slack.com/..."  # Slack/Discord
+
+sandbox:
+  enabled: false  # Docker isolation
 ```
 
-### 13 Agents, One Pipeline
-
-Each agent is a `.md` file — pure Markdown instructions that guide Claude Code through a specific task. No plugins, no frameworks, no vendor lock-in. Just text files that tell an AI what to do.
-
-| Agent | Role |
-|-------|------|
-| `clarification` | Ask questions, understand the idea |
-| `init` | Set up project structure |
-| `research` | Market analysis, API discovery |
-| `delivery-mode` | Choose deployment strategy |
-| `design` | Architecture and system design |
-| `scaffold` | Generate project skeleton |
-| `build` | Implement features with E2E tests |
-| `qa` | Test, lint, validate |
-| `deploy` | Ship to production |
-| `judge` | Quality gate — validates every stage |
-| `audit` | Self-audit in maintenance mode |
-| `feature` | Add features post-launch |
-| `fix` | Fix issues post-launch |
-
----
-
-## Safety
-
-- **Budget hard limits** — Pipeline stops when budget is exceeded
-- **Judge gates** — No stage progresses without quality validation
-- **Git safety net** — Every attempt is tagged, rollback is always possible
-- **Max retries** — 3 failures = blocked, requires human intervention
-- **Docker sandbox** — Optional isolated execution via `--sandbox`
-- **Crash recovery** — Automatic detection and safe resume
-
----
-
-## Notifications
-
-Get notified on Slack, Discord, or any webhook-compatible service:
-
-- Stage passed
-- Stage failed (with retry count)
-- Budget warning (approaching limit)
-- Pipeline blocked (needs human help)
-- Deployment complete (with live URL)
+Typical cost: **$50–200** from idea to deployed product.
 
 ---
 
 ## FAQ
 
 **Q: What can it build?**
-Web apps, APIs, dashboards, tools — anything Claude Code can build. It's particularly good at Next.js + Supabase stacks, but adapts to whatever makes sense for your idea.
-
-**Q: How long does it take?**
-Depends on complexity. A simple tool might take 10-15 sessions. A full web app with auth, dashboard, and API could take 30-50 sessions.
+Web apps, APIs, dashboards, tools — anything Claude Code can build.
 
 **Q: What if it gets stuck?**
-After 3 failed retries on any stage, the pipeline marks itself as `blocked` and notifies you. You can inspect the judge report, fix the issue manually, and resume.
+After 3 retries, the pipeline stops and notifies you. You can inspect the judge report, fix the issue, and resume.
 
-**Q: Can I modify the agents?**
-Yes. Every agent is a `.md` file. Edit them to change behavior, add constraints, or customize the pipeline for your needs.
+**Q: Can I use a different LLM?**
+The `.md` files are model-agnostic. The orchestrator currently calls `claude`, but swapping to another CLI is a one-line change.
+
+**Q: Can I modify the pipeline?**
+Yes. Add stages, remove stages, change agent behavior — it's all `.md` files. Fork and make it yours.
 
 **Q: Is my code safe?**
-All code is local (or in your git repo). The `--sandbox` flag runs agents in a Docker container for additional isolation. Budget limits prevent runaway costs.
+All code is local. `--sandbox` runs in Docker. Budget limits prevent runaway costs.
+
+---
+
+## Inspired By
+
+The idea that `.md` files can reliably control AI behavior comes from [Claude Code Superpowers](https://github.com/anthropics/claude-code-superpowers) — a skill system where single Markdown files turn Claude Code into a disciplined engineer following TDD, code review, and architectural planning workflows.
+
+InfiPragma asks: what if the entire product delivery process was a skill?
 
 ---
 
@@ -318,5 +338,6 @@ MIT
 ---
 
 <p align="center">
-<i>Built with the belief that the best developer experience is no developer experience.</i>
+<b>Markdown files are all you need.</b><br>
+<i>No framework. No SDK. No abstractions. Just .md files that deliver products.</i>
 </p>
