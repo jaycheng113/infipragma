@@ -33,6 +33,17 @@ issues:
 next_action: "what should happen next"
 ```
 
+### Step 5 — Update long-term memory
+- If verdict=pass:
+  - Append key learnings from this stage to `.infipragma/memory/MEMORY.md`
+  - Summarize technical decisions made during this stage
+- If verdict=fail:
+  - Read `stages.{current_stage}.retries` from registry.yaml
+  - If retries >= max_retries (from orchestration config):
+    - Set status to `blocked`
+    - Write detailed diagnostic to AUDIT.md with severity=critical
+    - Set next_action to "BLOCKED — requires human intervention"
+
 ## Stage transition criteria
 
 ### S0 (Clarification) -> S1 (Init)
