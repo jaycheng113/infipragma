@@ -9,8 +9,19 @@ if ! command -v timeout &> /dev/null; then
   if command -v gtimeout &> /dev/null; then
     timeout() { gtimeout "$@"; }
   else
-    # Fallback: run without timeout
-    timeout() { shift; "$@"; }
+    # Fallback: pure bash timeout using background process + kill
+    timeout() {
+      local duration="$1"; shift
+      "$@" &
+      local pid=$!
+      (sleep "$duration" && kill -TERM "$pid" 2>/dev/null) &
+      local watchdog=$!
+      wait "$pid" 2>/dev/null
+      local exit_code=$?
+      kill "$watchdog" 2>/dev/null
+      wait "$watchdog" 2>/dev/null
+      return $exit_code
+    }
   fi
 fi
 

@@ -34,16 +34,24 @@ Run full quality assurance: regression testing, performance audit, and security 
   - Overall verdict: PASS or FAIL
   - List of issues to fix before deployment
 
-### Step 6 — Mark stage complete
-- If PASS (no core regressions, no critical issues): set current stage status to `completed`. Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
-- If FAIL: keep stage status at `in_progress`, document what needs fixing in QA-REPORT.md.
+### Step 6 — Mark stage and attempt fixes
+- If PASS (no core regressions, no critical issues): set current stage status to `completed`.
+- If FAIL:
+  1. Document all failures in QA-REPORT.md.
+  2. Attempt to fix the failing tests/issues directly (up to 3 fix attempts per issue).
+  3. Re-run the failing tests after each fix to verify.
+  4. If all issues are resolved: set status to `completed`.
+  5. If issues remain after fix attempts: set status to `completed` anyway, but record the unresolved issues in QA-REPORT.md with verdict=FAIL. The judge will handle the fail/retry decision.
+
+Do NOT advance `current_stage` — the orchestrator handles stage advancement after judge approval.
 
 ## Required outputs (all mandatory)
 - [ ] All E2E tests executed
 - [ ] Lighthouse audit completed
 - [ ] Security scan completed
-- [ ] QA-REPORT.md written with full results
-- [ ] registry.yaml updated (S7 if pass, stays S6 if fail)
+- [ ] QA-REPORT.md written with full results and verdict (PASS or FAIL)
+- [ ] Failing tests fixed if possible
+- [ ] registry.yaml S6 status set to completed
 
 ## Session end (always execute last)
 1. Git commit with correct format (feat:, fix:, docs(.ai):)
@@ -56,5 +64,6 @@ Run full quality assurance: regression testing, performance audit, and security 
 ## Hard rules
 - NEVER advance to S7 if any core feature regresses.
 - NEVER skip Lighthouse or security scan.
-- NEVER mark QA as PASS with critical issues outstanding.
-- NEVER fix issues in this stage — diagnosis and reporting only (fixes happen in infipragma-fix).
+- NEVER mark QA verdict as PASS with critical issues outstanding.
+- ALWAYS set status to "completed" when done — even if verdict is FAIL. The judge decides whether to pass or retry.
+- ALWAYS attempt to fix failing tests before giving up.
