@@ -86,16 +86,16 @@ You:    1. Freelancers tracking business expenses weekly
 
 Claude: Got it. Here's a clickable HTML prototype with 3 screens...
         [generates prototype.html — landing, receipt capture, monthly dashboard]
-        Use /revise to iterate, or /approve to lock and proceed.
+        Use REVISE to iterate, or APPROVE to lock and proceed.
 
-You:    /approve
+You:    APPROVE
 
 Claude: Spec locked. Now running ./infipragma.sh
         [S0 Init -> S1 Research -> S2 Stack -> ... -> S7 Deploy]
         [autonomously delivers the product]
 ```
 
-The first phase is a **prototype conversation** — InfiPragma asks exactly 3 questions, generates a clickable HTML prototype, and waits for your `/approve` before building anything. After that, everything is autonomous.
+The first phase is a **prototype conversation** — InfiPragma asks exactly 3 questions, generates a clickable HTML prototype, and waits for your `APPROVE` before building anything. After that, everything is autonomous.
 
 Running through Claude Code is recommended — when the pipeline hits issues, Claude Code diagnoses and fixes it on the fly. You don't debug. You don't intervene. You plan.
 
@@ -116,8 +116,8 @@ Your Idea
    v
 +- Prototype (interactive) --------+
 |  3 questions -> HTML prototype    |
-|  /revise to iterate               |
-|  /approve to lock                 |
+|  REVISE to iterate               |
+|  APPROVE to lock                 |
 +----------------------------------+
    |
    v
